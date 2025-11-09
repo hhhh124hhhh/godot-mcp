@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://hahrbtjiophq"]
+
+[ext_resource type="Script" uid="uid://c7oy1y4qc4glr" path="res://Bubble.gd" id="1_445pw"]
+[ext_resource type="Script" uid="uid://dte11t5xqpa0u" path="res://GameManager.gd" id="2_dcd61"]
+
+[node name="BubbleGame" type="Node2D"]
+script = ExtResource("1_445pw")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1024.0
+offset_bottom = 600.0
+color = Color(0.9, 0.9, 1, 1)
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 21.0
+offset_bottom = 43.0
+text = "分数: 0"
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("2_dcd61")

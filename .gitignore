@@ -34,3 +34,6 @@ __pycache__/
 *.swp
 *~
 .~lock.*
+
+# Environment variables
+.env.local

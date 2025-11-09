@@ -12,6 +12,8 @@ A comprehensive integration between Godot Engine and AI assistants using the Mod
   - **Scene Commands**: Manipulate scenes and their structure
   - **Project Commands**: Access project settings and resources
   - **Editor Commands**: Control various editor functionality
+- **Enhanced MCP Tools**: Improved Model Context Protocol implementation for better AI integration
+- **Claude Skills**: Added specialized skills to enhance Claude's capabilities for Godot development
 
 ## Quick Setup
 

@@ -2,3 +2,41 @@ root = true
 
 [*]
 charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# GDScript 文件配置
+[*.gd]
+# 缩进设置 - 严格使用制表符缩进
+indent_style = tab
+indent_size = 4
+
+# GDScript 特定配置
+max_line_length = 120
+
+# TypeScript/JavaScript 文件配置
+[*.{ts,js,mjs,cjs}]
+# TypeScript 推荐使用空格缩进
+indent_style = space
+indent_size = 2
+max_line_length = 120
+
+# JSON 配置文件
+[*.json]
+indent_style = space
+indent_size = 2
+
+# YAML 配置文件
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# Markdown 文件
+[*.md]
+trim_trailing_whitespace = false
+
+# Shell 脚本
+[*.sh]
+indent_style = space
+indent_size = 4
