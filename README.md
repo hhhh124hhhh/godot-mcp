@@ -73,20 +73,46 @@ godot-mcp 基于 **Godot 4.x** 引擎构建，这是我们的技术基础和AI�
 ### 📚 Godot 学习资源
 - **官方文档**: https://docs.godotengine.org/
 - **示例项目**: https://github.com/godotengine/godot-demo-projects
-- **社区资源**: https://godotengine.org/asset-library/
+- **社区资源**: https://godotengine.org/asset-library/asset
 
 ## 🚀 快速开始
 
-> 📖 **新手推荐**: 查看 [5分钟快速开始指南](QUICK_START.md) 立即体验 AI 自动开发！
+> 🎉 **小白用户专享**: 运行 `./setup-mcp-tools.sh` (Linux/macOS) 或 `setup-mcp-tools.bat` (Windows) 一键配置所有 AI 技能！
 
-### 1. 克隆仓库
+> 📖 **详细指南**: 查看 [AI 技能快速配置指南](QUICK_MCP_SETUP.md) 或 [5分钟快速开始指南](QUICK_START.md)
 
+### ⚡ 一键配置 (推荐)
+
+**Linux/macOS 用户**:
+```bash
+git clone https://github.com/hhhh124hhhh/godot-mcp.git
+cd godot-mcp
+./setup-mcp-tools.sh
+```
+
+**Windows 用户**:
+```cmd
+git clone https://github.com/hhhh124hhhh/godot-mcp.git
+cd godot-mcp
+setup-mcp-tools.bat
+```
+
+**脚本会自动**：
+- ✅ 检查系统环境 (Node.js 18+)
+- ✅ 安装 4 个核心 MCP 工具
+- ✅ 构建 Godot MCP 服务器
+- ✅ 生成完整的 Claude Desktop 配置代码
+- ✅ 验证所有 AI 技能文件
+
+### 📋 手动安装步骤
+
+#### 1. 克隆仓库
 ```bash
 git clone https://github.com/hhhh124hhhh/godot-mcp.git
 cd godot-mcp
 ```
 
-### 2. 🎮 安装 Godot 引擎
+#### 2. 🎮 安装 Godot 引擎
 
 > **系统要求**: Godot 4.2+ (推荐 4.3 或更高版本)
 
@@ -155,6 +181,137 @@ cd ..
    > **注意**: 将 `PATH_TO_YOUR_PROJECT` 替换为仓库的绝对路径。
 
 3. 重启 Claude Desktop
+
+### 🎯 小白用户专享：一键配置 AI 技能
+
+> 🎉 **专为小白用户设计**！我们提供了一键配置脚本，自动设置所有 4 个核心 AI 技能所需的 MCP 工具。
+
+#### 🚀 一键配置 (推荐)
+
+**运行自动配置脚本**：
+```bash
+# 进入项目目录
+cd godot-mcp
+
+# 运行一键配置脚本
+./setup-mcp-tools.sh
+```
+
+**脚本会自动完成**：
+- ✅ 检查 Node.js 和 npm 环境
+- ✅ 安装所需的 MCP 工具
+- ✅ 验证 AI 技能文件完整性
+- ✅ 构建 Godot MCP 服务器
+- ✅ 生成完整的配置代码
+
+#### 📋 手动配置 (高级用户)
+
+如果需要手动配置，请按以下步骤：
+
+**步骤 1: 安装 MCP 工具**
+```bash
+# Chrome DevTools MCP (网页调试)
+npm install -g chrome-devtools-mcp
+
+# Sequential Thinking MCP (逻辑推理)
+npm install -g sequential-thinking-mcp
+
+# Context7 MCP (文档研究)
+npm install -g context7-mcp-server
+```
+
+**步骤 2: 配置 Claude Desktop**
+编辑配置文件，添加以下 MCP 服务器：
+
+```json
+{
+  "mcpServers": {
+    "godot-mcp": {
+      "command": "node",
+      "args": ["YOUR_PROJECT_PATH/server/dist/index.js"],
+      "env": {
+        "MCP_TRANSPORT": "stdio"
+      }
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["sequential-thinking-mcp"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["context7-mcp-server"]
+    }
+  }
+}
+```
+
+### 🧠 四大核心 AI 技能详解
+
+配置完成后，您将获得以下 4 个强大的 AI 技能：
+
+#### 1. 🤖 Context7 自动研究技能
+- **功能**: 自动获取最新技术文档和最佳实践
+- **触发**: "如何实现"、"配置"、"文档"等关键词
+- **用途**: 无需手动查询，AI 自动为您找到最新资料
+- **示例**:
+  ```
+  用户: "如何实现 Godot 4.x 彩色粒子效果"
+  → AI 自动查询官方文档，返回完整实现方案
+  ```
+
+#### 2. 🎮 Godot 兼容性检查技能
+- **功能**: 自动检测和修复版本兼容性问题
+- **触发**: 版本升级、API 错误、兼容性问题
+- **用途**: 解决 Godot 3.x 到 4.x 的 API 迁移问题
+- **示例**:
+  ```
+  用户: "遇到错误：Invalid assignment of property 'emission_amount'"
+  → AI 自动识别问题并提供修复方案
+  ```
+
+#### 3. 🔧 MCP 工具编排技能
+- **功能**: 智能协调多个工具完成复杂任务
+- **触发**: 多步骤开发流程、工具链协作
+- **用途**: 自动化复杂的工作流程，提高开发效率
+- **示例**:
+  ```
+  用户: "创建一个完整的游戏主菜单系统"
+  → AI 自动协调 UI设计、脚本编写、测试验证等步骤
+  ```
+
+#### 4. 🌏 中文开发指南技能
+- **功能**: 完整的中文环境配置和开发指导
+- **触发**: 中文交流、本地化需求
+- **用途**: 解决中文编码、显示等问题，提供本土化支持
+- **示例**:
+  ```
+  用户: "如何配置中文开发环境"
+  → AI 提供完整的中文化配置方案
+  ```
+
+### 🎮 验证配置成功
+
+**测试 AI 技能**：
+1. 重启 Claude Desktop
+2. 发送测试消息：`"如何实现一个简单的 Godot 粒子效果"`
+3. 观察 AI 是否自动触发 `context7-auto-research` 技能
+4. 检查返回的内容是否包含详细的实现方案
+
+**技能状态检查**：
+```bash
+# 检查技能文件是否存在
+ls -la .claude/skills/
+
+# 验证 MCP 工具连接
+claude mcp list
+
+# 运行完整验证脚本
+./verify-mcp-setup.sh
+```
 
 ### 5. 🎮 在 Godot 中打开示例项目
 
