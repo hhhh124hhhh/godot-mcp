@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp60oqymyyjla"]
+
+[ext_resource type="Script" uid="uid://dmegl1rs6c4i5" path="res://GameManager.gd" id="1_ekp8g"]
+[ext_resource type="Script" path="res://BackgroundManager.gd" id="2_background"]
+
+[node name="BubbleGame" type="Node2D"]
+script = ExtResource("1_ekp8g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 0)
+
+[node name="BackgroundManager" type="Node2D" parent="."]
+script = ExtResource("2_background")
+
+[node name="GameLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreContainer" type="HBoxContainer" parent="UILayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -585.0
+offset_right = 209.0
+offset_bottom = -478.0
+grow_vertical = 0
+
+[node name="ScoreLabel" type="Label" parent="UILayer/ScoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "分数: 0"
+
+[node name="DifficultyLabel" type="Label" parent="UILayer/ScoreContainer"]
+layout_mode = 2
+text = "难度: 1"

@@ -4,6 +4,7 @@ import { scriptTools } from './tools/script_tools.js';
 import { sceneTools } from './tools/scene_tools.js';
 import { editorTools } from './tools/editor_tools.js';
 import { getGodotConnection } from './utils/godot_connection.js';
+import { compatibilityTools } from './tools/godot_compatibility_tools.js';
 
 // Import resources
 import { 
@@ -40,6 +41,11 @@ async function main() {
 
   // Register all tools
   [...nodeTools, ...scriptTools, ...sceneTools, ...editorTools].forEach(tool => {
+    server.addTool(tool);
+  });
+
+  // Register compatibility tools
+  compatibilityTools.forEach(tool => {
     server.addTool(tool);
   });
 

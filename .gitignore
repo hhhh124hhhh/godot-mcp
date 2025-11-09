@@ -40,3 +40,16 @@ __pycache__/
 
 # History directories
 .history/
+.skip-template
+
+# Archive directories
+archive/
+
+# Project reports (temporary)
+DOCUMENTATION_AUDIT_REPORT.md
+PROJECT_REORGANIZATION_REPORT.md
+OPEN_SOURCE_PROJECT_AUDIT.md
+GODOT_ENGINE_UPDATE_REPORT.md
+OPEN_SOURCE_IMPLEMENTATION_REPORT.md
+docs/DOCUMENTATION_MANAGEMENT_GUIDE.md
+CLAUDE.md

@@ -1,0 +1,23 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.gd]
+# GDScript 缩进配置
+indent_style = tab
+indent_size = 4
+
+# 换行配置
+max_line_length = 120
+
+# Godot 特定配置
+ij_gdsharp_space_before_colon = false
+ij_gdsharp_space_after_colon = true
+ij_gdsharp_space_before_comma = false
+ij_gdsharp_space_after_comma = true
+ij_gdsharp_space_around_additive_operators = true
+ij_gdsharp_space_around_assignment_operators = true

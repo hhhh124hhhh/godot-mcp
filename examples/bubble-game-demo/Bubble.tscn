@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqeq1ba84x4h5"]
+
+[ext_resource type="Script" path="res://Bubble.gd" id="1_rv33j"]
+[ext_resource type="Texture" path="res://bubble.svg" id="2_dx9bg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jgjix"]
+radius = 30.0
+
+[node name="Bubble" type="Area2D"]
+position = Vector2(0, 0)
+script = ExtResource("1_rv33j")
+
+# 这个变量将在实例化时被覆盖，用于设置泡泡类型
+# 可选值: "normal", "golden", "rainbow", "large"
+bubble_type = "normal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_jgjix")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_dx9bg")
+
+# 注意：实际的视觉效果将在Bubble.gd脚本中根据bubble_type动态设置
+# 不同类型的泡泡会有不同的大小、颜色和特效
+# 脚本中的setup_visual_effects()函数会负责应用这些设置

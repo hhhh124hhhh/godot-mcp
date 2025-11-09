@@ -40,7 +40,9 @@
       "mcp__context7__resolve-library-id",
       "Skill(context7-auto-research)",
       "Skill(godot-compatibility-checker)",
-      "mcp__context7__get-library-docs"
+      "mcp__context7__get-library-docs",
+      "mcp__sequential-thinking__sequential_thinking",
+      "mcp__sequential-thinking__problem_breakdown"
     ],
     "deny": [],
     "ask": []

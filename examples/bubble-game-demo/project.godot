@@ -1,0 +1,75 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+global_script_classes=[]
+global_script_class_icons={}
+autoloads={}
+
+[application]
+
+config/name="戳泡泡游戏"
+config/description="戳泡泡小游戏"
+run/main_scene="res://BubbleGame.tscn"
+config/features=PackedStringArray("4.5")
+config/icon="res://icon.svg"
+config/copyright="2025"
+config/display_version="1.0"
+
+[debug]
+
+debug_collisions=false
+debug_navigation=false
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=600
+window/size/width=1024
+window/size/height=768
+window/title="戳泡泡游戏"
+window/min_size/width=800
+window/min_size/height=600
+stretch/mode="viewport"
+stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=[]
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194309,"physical_keycode":0,"key_label":0,"unicode":4194309,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
+]
+}
+ui_cancel={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194306,"physical_keycode":0,"key_label":0,"unicode":4194306,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":4194305,"location":0,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_physics/layer_1="GameLayer"
+2d_physics/layer_2="UILayer"
+
+[physics]
+
+2d/default_gravity=0
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+renderer/subsurface_scattering/quality=0
+renderer/textures/default_texture_filter=1
+renderer/textures/default_texture_repeat=0
