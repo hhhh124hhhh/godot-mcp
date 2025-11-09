@@ -1,5 +1,7 @@
 # Godot-specific ignores
 .godot/
+examples/fighting-game/
+
 .import/
 export.cfg
 export_presets.cfg
@@ -57,3 +59,20 @@ FINAL_VERIFICATION_REPORT.md
 .claude/settings.local.json
 LINK_VERIFICATION_REPORT.md
 MCP_SKILLS_SETUP_REPORT.md
+.claude/skills/GODOT_SKILLS_CORRECTION_REPORT.md
+examples/fighting-game/Quicker_20251109_165837.png
+examples/fighting-game/Quicker_20251109_165837.png.import
+test_skills_integration.py
+GAME_DEVELOPMENT_SKILLS_COMPLETION_REPORT.md
+skills_integration_test_report.json
+examples/fighting-game/错误.png
+.gitignore
+examples/fighting-game/错误.png.import
+examples/fighting-game/BUG_FIX_REPORT.md
+examples/fighting-game/combat-colliders-main.zip
+examples/fighting-game/FINAL_FIX_REPORT.md
+examples/fighting-game/COMPLETE_SOLUTION_REPORT.md
+examples/fighting-game/DEVELOPMENT_REPORT.md
+examples/fighting-game/SKILL_TESTING_REPORT.md
+examples/fighting-game/test_game_status.md
+examples/fighting-game/test_game.py
