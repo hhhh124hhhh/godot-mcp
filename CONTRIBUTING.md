@@ -24,13 +24,13 @@
    ```bash
    # 在 GitHub 上点击 "Fork" 按钮
    # 然后克隆你的 fork
-   git clone https://github.com/YOUR_USERNAME/godot-mcp.git
+   git clone https://github.com/hhhh124hhhh/godot-mcp.git
    cd godot-mcp
    ```
 
 2. **设置上游仓库**
    ```bash
-   git remote add upstream https://github.com/ee0pdt/godot-mcp.git
+   git remote add upstream https://github.com/hhhh124hhhh/godot-mcp.git
    git fetch upstream
    ```
 

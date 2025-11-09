@@ -12,7 +12,7 @@
 
 ### 1. 克隆项目
 ```bash
-git clone https://github.com/ee0pdt/godot-mcp.git
+git clone https://github.com/hhhh124hhhh/godot-mcp.git
 cd godot-mcp
 ```
 

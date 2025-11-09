@@ -218,9 +218,8 @@ Claude AI ↔ MCP Server ↔ WebSocket ↔ Godot Plugin
 
 ## 📞 联系我们
 
-- **GitHub**: https://github.com/ee0pdt/godot-mcp
+- **GitHub**: https://github.com/hhhh124hhhh/godot-mcp
 - **文档**: https://docs.godot-mcp.dev
-- **社区**: [Discord 链接]
-- **邮箱**: contact@godot-mcp.dev
+- **邮箱**: hhhh124hhhh@qq.com
 
 **加入我们，一起探索 AI 游戏开发的无限可能！** 🚀
