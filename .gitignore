@@ -37,3 +37,6 @@ __pycache__/
 
 # Environment variables
 .env.local
+
+# History directories
+.history/
