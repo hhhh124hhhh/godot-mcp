@@ -2,6 +2,15 @@
 .godot/
 examples/fighting-game/
 
+# Canvas and document skills
+.claude/skills/canvas-design_画布设计/
+.claude/skills/document-skills_文档技能/
+.claude/skills/mcp-builder_MCP构建器/
+.claude/skills/template-skill_模板技能/
+
+# Skill Seekers directory
+Skill_Seekers/
+
 .import/
 export.cfg
 export_presets.cfg
@@ -76,3 +85,4 @@ examples/fighting-game/DEVELOPMENT_REPORT.md
 examples/fighting-game/SKILL_TESTING_REPORT.md
 examples/fighting-game/test_game_status.md
 examples/fighting-game/test_game.py
+examples/台球项目/
