@@ -673,6 +673,34 @@ particles.fixed_fps = 30`
 
     let fixedCode = originalCode;
 
+    // 辅助函数：尝试从上下文识别正确的粒子系统变量名
+    const findParticlesVariable = (code: string, matchLine: string): string => {
+      // 检查是否有直接的对象引用（如 object.material.emission_amount）
+      const objectMatch = matchLine.match(/(\w+)\.material\s*\./);
+      if (objectMatch) {
+        return objectMatch[1];
+      }
+      
+      // 在当前行附近搜索可能的粒子系统变量定义
+      const lines = code.split('\n');
+      const matchIndex = lines.findIndex(line => line.includes(matchLine));
+      
+      if (matchIndex !== -1) {
+        // 向前搜索最多10行查找相关的粒子系统变量
+        for (let i = Math.max(0, matchIndex - 10); i < matchIndex; i++) {
+          const line = lines[i].trim();
+          // 检查常见的粒子系统变量定义模式
+          const particleVarMatch = line.match(/var\s+(\w+)\s*=\s*(\$|get_node\([^)]+\))[^;]*Particles?/i);
+          if (particleVarMatch) {
+            return particleVarMatch[1];
+          }
+        }
+      }
+      
+      // 默认返回particles作为后备
+      return 'particles';
+    };
+
     switch (issue.godot3Method) {
       case 'has_property':
         // 替换has_property调用
@@ -685,70 +713,87 @@ particles.fixed_fps = 30`
       case 'set_looped':
         // 替换set_looped调用
         fixedCode = fixedCode.replace(/(\w+)\.set_looped\s*\([^)]*\)/g,
-          '# $1.set_looped() 已移除，请使用callback循环');
+          (match, objectName) => {
+            return `# ${objectName}.set_looped() 已移除，请使用callback循环\n# 示例：\n# func animate_loop():\n#     var tween = ${objectName}.create_tween()\n#     # 动画代码...\n#     tween.tween_callback(animate_loop)  # 循环调用`;
+          });
         break;
 
       case 'get_color_at_offset':
         // 替换get_color_at_offset调用
-        fixedCode = fixedCode.replace(/gradient\.get_color_at_offset\s*\([^)]*\)/g,
-          'gradient.get_color(index)  # 请替换为正确的索引');
+        fixedCode = fixedCode.replace(/(\w+)\.get_color_at_offset\s*\([^)]*\)/g,
+          (match, gradientName) => {
+            return `${gradientName}.get_color(index)  # 修复：请替换为正确的索引，基于渐变点的数量`;
+          });
         break;
 
       case 'ColorRect':
-        // 建议使用TextureRect
-        fixedCode = fixedCode.replace(/ColorRect/g, 'TextureRect  # 建议使用TextureRect处理渐变');
+        // 建议使用TextureRect - 改进匹配逻辑
+        fixedCode = fixedCode.replace(/class_name\s+ColorRect/g, 'class_name TextureRect  # 修复：建议使用TextureRect处理渐变');
+        fixedCode = fixedCode.replace(/extends\s+ColorRect/g, 'extends TextureRect  # 修复：建议使用TextureRect处理渐变');
+        fixedCode = fixedCode.replace(/ColorRect\s*\(/g, 'TextureRect()  # 修复：建议使用TextureRect处理渐变');
         break;
 
       case 'material.emission_amount':
         // 修复material.emission_amount的错误用法
-        fixedCode = fixedCode.replace(/(?:\w+\.)?material\s*\.\s*emission_amount\s*=\s*([^;\n]+)/g,
-          (match, value) => {
-            // 使用默认的particles变量名
-            const particlesName = 'particles';
-            return `${particlesName}.amount = ${value}  # 修复：从material.emission_amount改为particles.amount`;
+        fixedCode = fixedCode.replace(/((?:\w+\.)?material\s*\.\s*emission_amount\s*=\s*[^;\n]+)/g,
+          (match, fullMatch) => {
+            const particlesName = findParticlesVariable(fixedCode, fullMatch);
+            const valueMatch = fullMatch.match(/=\s*([^;\n]+)/);
+            const value = valueMatch ? valueMatch[1] : '1.0';
+            return `${particlesName}.amount = ${value}  # 修复：从material.emission_amount改为${particlesName}.amount`;
           });
         break;
 
       case 'material.lifetime':
         // 修复material.lifetime的错误用法
-        fixedCode = fixedCode.replace(/(?:\w+\.)?material\s*\.\s*lifetime\s*=\s*([^;\n]+)/g,
-          (match, value) => {
-            const particlesName = 'particles';
-            return `${particlesName}.lifetime = ${value}  # 修复：从material.lifetime改为particles.lifetime`;
+        fixedCode = fixedCode.replace(/((?:\w+\.)?material\s*\.\s*lifetime\s*=\s*[^;\n]+)/g,
+          (match, fullMatch) => {
+            const particlesName = findParticlesVariable(fixedCode, fullMatch);
+            const valueMatch = fullMatch.match(/=\s*([^;\n]+)/);
+            const value = valueMatch ? valueMatch[1] : '1.0';
+            return `${particlesName}.lifetime = ${value}  # 修复：从material.lifetime改为${particlesName}.lifetime`;
           });
         break;
 
       case 'material.one_shot':
         // 修复material.one_shot的错误用法
-        fixedCode = fixedCode.replace(/(?:\w+\.)?material\s*\.\s*one_shot\s*=\s*([^;\n]+)/g,
-          (match, value) => {
-            const particlesName = 'particles';
-            return `${particlesName}.one_shot = ${value}  # 修复：从material.one_shot改为particles.one_shot`;
+        fixedCode = fixedCode.replace(/((?:\w+\.)?material\s*\.\s*one_shot\s*=\s*[^;\n]+)/g,
+          (match, fullMatch) => {
+            const particlesName = findParticlesVariable(fixedCode, fullMatch);
+            const valueMatch = fullMatch.match(/=\s*([^;\n]+)/);
+            const value = valueMatch ? valueMatch[1] : 'false';
+            return `${particlesName}.one_shot = ${value}  # 修复：从material.one_shot改为${particlesName}.one_shot`;
           });
         break;
 
       case 'material.randomness':
         // 修复material.randomness的错误用法
-        fixedCode = fixedCode.replace(/(?:\w+\.)?material\s*\.\s*randomness\s*=\s*([^;\n]+)/g,
-          (match, value) => {
-            const particlesName = 'particles';
-            return `${particlesName}.randomness = ${value}  # 修复：从material.randomness改为particles.randomness`;
+        fixedCode = fixedCode.replace(/((?:\w+\.)?material\s*\.\s*randomness\s*=\s*[^;\n]+)/g,
+          (match, fullMatch) => {
+            const particlesName = findParticlesVariable(fixedCode, fullMatch);
+            const valueMatch = fullMatch.match(/=\s*([^;\n]+)/);
+            const value = valueMatch ? valueMatch[1] : '0.0';
+            return `${particlesName}.randomness = ${value}  # 修复：从material.randomness改为${particlesName}.randomness`;
           });
         break;
 
       case 'material.fixed_fps':
         // 修复material.fixed_fps的错误用法
-        fixedCode = fixedCode.replace(/(?:\w+\.)?material\s*\.\s*fixed_fps\s*=\s*([^;\n]+)/g,
-          (match, value) => {
-            const particlesName = 'particles';
-            return `${particlesName}.fixed_fps = ${value}  # 修复：从material.fixed_fps改为particles.fixed_fps`;
+        fixedCode = fixedCode.replace(/((?:\w+\.)?material\s*\.\s*fixed_fps\s*=\s*[^;\n]+)/g,
+          (match, fullMatch) => {
+            const particlesName = findParticlesVariable(fixedCode, fullMatch);
+            const valueMatch = fullMatch.match(/=\s*([^;\n]+)/);
+            const value = valueMatch ? valueMatch[1] : '0';
+            return `${particlesName}.fixed_fps = ${value}  # 修复：从material.fixed_fps改为${particlesName}.fixed_fps`;
           });
         break;
     }
 
-    // 添加修复说明注释
+    // 添加修复说明注释 - 避免重复添加相同的注释
     if (fixedCode !== originalCode) {
-      fixedCode += `\n\n# 修复说明: ${issue.description}\n# 建议: ${issue.migrationNotes}`;
+      if (!fixedCode.includes(issue.description)) {
+        fixedCode += `\n\n# 修复说明: ${issue.description}\n# 建议: ${issue.migrationNotes}`;
+      }
     }
 
     return fixedCode;
