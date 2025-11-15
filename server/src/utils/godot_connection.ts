@@ -40,7 +40,7 @@ export class GodotConnection {
    * @param retryDelay Delay between retries in ms
    */
   constructor(
-    private url: string = 'ws://localhost:9080',
+    private url: string = 'ws://localhost:9081',  // Changed from 9080 to avoid conflict with XunLei
     private timeout: number = 20000,
     private maxRetries: number = 3,
     private retryDelay: number = 2000

@@ -2,7 +2,7 @@
 extends EditorPlugin
 
 var tcp_server := TCPServer.new()
-var port := 9080
+var port := 9081  # Changed from 9080 to avoid conflict with XunLei
 var handshake_timeout := 3000 # ms
 var debug_mode := true
 var log_detailed := true  # Enable detailed logging
